@@ -1,5 +1,7 @@
-# HIERARHIA LEIDJA 01 SOURCIMISEKS 
+############ KIRJUTATUD STATISTIKAAMETIS
+############ WRITTEN IN STATISTICS ESTONIA
 
+# HIERARHIA LEIDJA 01 SOURCIMISEKS 
 # Mitmest abifunktsioonist koosnev funktsioon.
 # Siin on mitu aspekti, mis puhtalt R-i programmeerimiskeele ja põhimõtete osas vajaks parandamist.
 # Näiteks see, et globaalsesse keskkonda luuakse muutujad iga kord selle funktsiooni esilekutsumisel.
@@ -281,45 +283,7 @@ hierarhia_leidja_01 <- function(koodiloendi_eksemplar = NULL,
     grupid_tegelik3[names(sort(sapply(grupid_tegelik3, function(x) sum(sapply(x, gsub, pattern = "@", replacement = "") %in% names(grupid_tegelik3))), decreasing = T))]
   
   nimede_salvestus <- names(grupid_tegelik3)
-  # eeldab eelnevat sorteerimist pikkuse järgi
-  
-  
-  # uus viis sisekuubi jaoks - teha erand gruppidele:
-  # hetkel jätan vahele
-  # 
-  # grupid_tegelik3 <- lapply(1:(length(grupid_tegelik3)), function(x){
-  #   if(x == length(grupid_tegelik3)){
-  #     return(grupid_tegelik3[[x]])
-  #   }
-  #   reduce(sapply(grupid_tegelik3[[x]], function(y) { if (y %in% reduce(grupid_tegelik3[(x + 1):length(grupid_tegelik3)], c) & !(y %in% paste0("@",names(grupid_tegelik3)))){
-  #     return(NULL) } else return(y)}), c)
-  # })
-
-  # vana viis:
-  # --------
-  # grupid_tegelik3 <- lapply(1:(length(grupid_tegelik3)), function(x){
-  #   if(x == length(grupid_tegelik3)){
-  #     return(grupid_tegelik3[[x]])
-  #   }
-  #   reduce(sapply(grupid_tegelik3[[x]], function(y) { if (y %in% reduce(grupid_tegelik3[(x + 1):length(grupid_tegelik3)], c)){
-  #     return(NULL) } else return(y)}), c)
-  # })
-  
-  # koodiloendi järjekorra järgi filtreerimine
-  # grupid_tegelik3[names(grupid_tegelik3) %in% koodiloend$KOODILOEND]
-  # names(grupid_tegelik3)
-  # #koodiloend$KOODILOEND
-  # names(grupid_tegelik_abi)
-  # grupid_tegelik_abi <- grupid_tegelik3[names(grupid_tegelik3) %in% koodiloend$KOODILOEND]
-  # grupid_tegelik3 <- 
-  #   lapply(1:(length(grupid_tegelik3)), function(x){
-  #   if(x == length(grupid_tegelik3)){
-  #     return(grupid_tegelik3[[x]])
-  #   }
-  #   reduce(sapply(grupid_tegelik3[[x]], function(y) { if (y %in% reduce(grupid_tegelik3[(x + 1):length(grupid_tegelik3)], c)){
-  #     return(NULL) } else return(y)}), c)
-  # })
-  #--------
+ 
   names(grupid_tegelik3) <- nimede_salvestus
   
   
@@ -358,70 +322,13 @@ hierarhia_leidja_01 <- function(koodiloendi_eksemplar = NULL,
   warning(reduce(c(" Globaalsesse keskkonnda (.GlobalEnv) luuakse uued muutujad: ", c("abiindeksi_salvestus", "aluslist",                 "hierarhia_vastus",         "indeksi_salvestus",        "indeksvektor_abi",         "indeksvektor_abi_eelmine", "kood_sisendiks",           "oige_muudatus",            "salvestus",
                                                                                       "sisendvaartus",            "tulemus",                  "uus_vahelist",             "uus_vahelist_muudetud",    "uusvastus" ,               "vahevastus" ,              "ylemkategooria", "duplikaadid_sisse")), paste, sep = ", "))
   
-  # 
-  # vastus <- vector(mode = "list")
-  # 
-  # abivekt <- substr(koodiloend$KOODILOEND,1,1)
-  # muutus <- 1
-  # for(i in 1:(length(abivekt) - 1)){
-  #   if(abivekt[i] != abivekt[i+ 1]){
-  #     # print(i)
-  #     vahevastus <- koodiloend$KOODILOEND[(muutus + 1): i]
-  #     vastus <- c(vastus, list(vastus, vahevastus))
-  #     vastus <- vastus[-(length(vastus) -1)]
-  #     names(vastus)[length(vastus)] <- vastus[[length(vastus)]][1]
-  #     muutus <- i
-  #   }
-  # }
-  # #names(vastus)[1] <- koodiloend$KOODILOEND[1]
-  # vastus
-  # filtreerimis_list <- vastus
-  # filtreerimis_list <- lapply(filtreerimis_list, function(x) paste0("@",x))
-  # filtreerimis_list <- c(grupid_tegelik3[1], filtreerimis_list)
-  # filtreerimis_list <-      filtreerimis_list[reduce(lapply(filtreerimis_list, function(x) length(x) > 1),c)]
-  # nimede_salvestus <- names(filtreerimis_list)
-  # filtreerimis_list <- 
-  #   lapply(1:(length(filtreerimis_list)), function(x){
-  #     if(x == length(filtreerimis_list)){
-  #       return(filtreerimis_list[[x]])
-  #     }
-  #     reduce(sapply(filtreerimis_list[[x]], function(y) { if (y %in% reduce(filtreerimis_list[(x + 1):length(filtreerimis_list)], c)){
-  #       return(NULL) } else return(y)}), c)
-  #   })
-  # names(filtreerimis_list) <- nimede_salvestus
-  # # filtreerimis_list[[1]] <- sapply(filtreerimis_list[[1]], function(x) if(!gsub(x, pattern = "@", replacement ="") %in% names(filtreerimis_list)){
-  # #   return(NULL)
-  # # } else return(x))
-  # 
-  # filtreerimis_list[[1]] <- paste0("@",names(filtreerimis_list)[2:length(names(filtreerimis_list))])
-  # filtreerimis_list <- lapply(filtreerimis_list, function(x) x[2:length(x)])
-  # filtreerimis_list <-      filtreerimis_list[reduce(lapply(filtreerimis_list, function(x) length(x) > 1),c)]
-  # # 
-  
-  # 
-  # # filtreerimisloogika oleks selline - võtta ainult need sisaldused nagu praegu loendist saab lugeda
-  # filtreerimis_list2 <-      filtreerimis_list[reduce(lapply(filtreerimis_list, function(x) length(x) > 3),c)]
-  # 
-  # filtreerimis_list2 <- filtreerimis_list2[names(filtreerimis_list2) != "M711"]
-  # grupid_tegelik3[names(filtreerimis_list2)] <- filtreerimis_list2
-  # 
-  
+
+
   
   # PEAFUNKTSIOONI RAKENDAMINE-----------
   
   # õige rakendamine - ainult nende kategooriate peal kus vaja
   # Valida peakategooria, rakendada selle peal ja kontrollida, et kõik koodid oleksid kaetud ega oleks topeltväärtusi
-  
-  #saadud_hierarhia <- rekurs_peafun(paste0("@",names(grupid_tegelik3)[1]), grupid_tegelik3, duplikaadid_sisse = duplikaadid_sisse)
-  #saadud_hierarhia <- rekurs_peafun(paste0("@",names(filtreerimis_list)[1]), filtreerimis_list, duplikaadid_sisse = duplikaadid_sisse)
-  
-  # 
-  # grupid_tegelik3$TOTAL <- sapply(grupid_tegelik3$TOTAL, function(x) {
-  #   if(gsub(x, pattern = "@", replacement = "") %in% names(grupid_tegelik3)){
-  #     return(x)
-  #   } else {return(NULL)}
-  #   }) %>% reduce(., c)
-  
   # sellega visatakse välja sellised, mida mida grupid_tegelik3 nimedes ei ole selle mõttega, et teise või madalama taseme alamkoodid saaksid välja võetud
   # sisse tuleb aga jätta need, mis on ainult TOTALi all
 
@@ -525,9 +432,6 @@ saadud_hierarhia <- sapply(seq_along(saadud_hierarhia), function(x) if( saadud_h
      stop("KÕIK ETTEANTUD KOODILOENDI KOODID EI OLE SAADUD HIERARHIAS")
    }
  }
-
-# Välja jätta tühi "@" kui see on sisse jäänud???
-
 
   saadud_hierarhia <- saadud_hierarhia[saadud_hierarhia != "@"]
 
