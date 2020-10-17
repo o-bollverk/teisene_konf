@@ -1,3 +1,5 @@
+############ KIRJUTATUD STATISTIKAAMETIS
+############ WRITTEN IN STATISTICS ESTONIA
 
 # Argumentide selgitused:
 
@@ -251,7 +253,6 @@ teisene_konf_arvutaja_adit_testija <- function(KUUP_SISEND,
                                                       vaartustunnus = vaartustunnus)
     
     
-    # formuleeritakse tegevusala  
     # objekti nimi peaks vastama hierarhiale, näiteks dim.COUNTY kui automaatselt genereerida, aga muu osa jääb samaks
     # ehk dim.COUNTY <- data.frame(... jne
     
