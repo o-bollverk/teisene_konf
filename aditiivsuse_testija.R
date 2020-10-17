@@ -1,7 +1,9 @@
+############ KIRJUTATUD STATISTIKAAMETIS
+############ WRITTEN IN STATISTICS ESTONIA
+
 # Aditiivsuse_testija
 # Aditiivsuse testimiseks kasutada funktsiooni teisene_konf_arvutaja_adit_testija,
 # mis sourcib seda funktsiooni.
-
 
 # Vajalikud paketid:
 library(forcats)
